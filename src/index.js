@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'mobx-react';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import schedule from './stores/schedule';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider schedule={schedule}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
