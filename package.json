@@ -1,4 +1,5 @@
 {
+  "homepage": "http://hischedule.kro.kr/",
   "name": "hongik-schedule",
   "version": "0.1.0",
   "private": true,
@@ -8,6 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "array-move": "^3.0.1",
     "bootstrap": "^4.5.2",
+    "gh-pages": "^3.1.0",
     "mobx": "^5.15.6",
     "mobx-react": "^6.3.0",
     "react": "^16.13.1",
@@ -22,7 +24,9 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
