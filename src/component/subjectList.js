@@ -3,7 +3,7 @@ import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 import { observer, inject } from 'mobx-react';
 
-
+import { Button, ButtonGroup, InputGroup, FormControl } from 'react-bootstrap'
 
 const ItemEdit = inject("schedule")(observer(({ schedule, data, toggleEdit }) => {
 
@@ -12,24 +12,29 @@ const ItemEdit = inject("schedule")(observer(({ schedule, data, toggleEdit }) =>
     const [link, setLink] = useState(data.link);
 
     const saveSubject = () => {
-        schedule.edit(_name, name, link);
+        let res = schedule.edit(_name, name, link);
+        if (res) toggleEdit();
     }
 
     return (
         <div>
-            <input type="text" className="" placeholder="과목명" value={name} onChange={e => setName(e.target.value)}/>
-            <input type="text" className="" placeholder="Webex 링크" value={link} onChange={e => setLink(e.target.value)}/>
-            &nbsp;
-            <button type="submit" className="" onClick={e => { saveSubject(), toggleEdit() }}>ok</button>
+            <InputGroup size="sm" className="m-0">
+                <FormControl type="text" className="" placeholder="과목명" value={name} onChange={e => setName(e.target.value)} />
+                <FormControl type="text" className="" placeholder="Webex 링크" value={link} onChange={e => setLink(e.target.value)} />
+                <InputGroup.Append>
+                    <Button className="" onClick={e => { saveSubject() }} variant="outline-secondary">확인</Button>
+                </InputGroup.Append>
+            </InputGroup>
         </div>
     )
 }))
 
 const ItemSelect = ({data, toggleSelect}) => {
     return (
-        <div>
-            {data.name}
-           <button className="" onClick={e => toggleSelect()}>deselect</button>
+        <div className="d-flex justify-content-between">
+            <span className="align-self-center font-weight-bold">{data.name}</span>
+            &nbsp;&nbsp;&nbsp;
+            <Button size="sm" variant="primary" onClick={e => toggleSelect()}>선택 완료</Button>
         </div>
     )
 }
@@ -59,22 +64,30 @@ const SortableItem = SortableElement(inject("schedule")(observer(({ schedule, da
     return (
         <form>
             <fieldset disabled={schedule.selected && schedule.selected[0] !== data.name}>
-                {
-                    (() => {
-                        if (edit) return (<ItemEdit data={data} toggleEdit={e => toggleEdit()}/>)
-                        if (select) return (<ItemSelect data={data} toggleSelect={e => toggleSelect()}/>)
-                        return (<>
-                            <span>{data.name}</span>
-                            &nbsp;
-                            <button className="" onClick={e => toggleSelect(e)}>select</button>
-                            <button className="" onClick={e => toggleEdit()}>edit</button>
-                            <button className="" onClick={e => removeItem(e)}>remove</button>
-                            <button className="" onClick={e => 1}>go</button>
-                        </>)
-
-                        
-                    })()
-                }
+                <div className="m-0 mb-2 pl-2 pr-2 pb-1 pt-1 border border-primary rounded">
+                    {
+                        (() => {
+                            if (edit) return (<ItemEdit data={data} toggleEdit={e => toggleEdit()}/>)
+                            if (select) return (<ItemSelect data={data} toggleSelect={e => toggleSelect()}/>)
+                            return (
+                                <div className="d-flex justify-content-between">
+                                    <span className="align-self-center font-weight-bold ml-1">{data.name}</span>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <div>
+                                        <ButtonGroup size="sm">
+                                            <Button variant="border border-primary" onClick={e => toggleSelect(e)}>선택</Button>
+                                            <Button variant="border border-primary" onClick={e => toggleEdit()}>수정</Button>
+                                            <Button variant="border border-primary" onClick={e => removeItem(e)}>X</Button>
+                                        </ButtonGroup>
+                                        &nbsp;
+                                        &nbsp;
+                                        <Button size="sm" variant="primary font-weight-bold" onClick={e => window.open(data.link, "_blank")}>&nbsp;GO&nbsp;</Button>
+                                    </div>
+                                </div>
+                            )
+                        })()
+                    }
+                </div>
             </fieldset>
         </form>
     )
@@ -83,11 +96,11 @@ const SortableItem = SortableElement(inject("schedule")(observer(({ schedule, da
 
 const SortableList = SortableContainer(({items}) => {
   return (
-    <ul>
+    <div className="mt-2 mb-3">
       {items.map((data, index) => (
         <SortableItem key={`item-${data.name}`} index={index} value={data.name} data={data} />
       ))}
-    </ul>
+    </div>
   );
 });
 
@@ -99,9 +112,9 @@ const SubjectList = inject("schedule")(observer(({ schedule }) => {
     };
 
     return (
-        <>
+        <div className="noselect">
             <SortableList items={schedule.subjectStore.toJS()} onSortEnd={onSortEnd} />
-        </>
+        </div>
     );
 
 }))
