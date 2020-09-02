@@ -25,33 +25,58 @@ const ItemEdit = inject("schedule")(observer(({ schedule, data, toggleEdit }) =>
     )
 }))
 
+const ItemSelect = ({data, toggleSelect}) => {
+    return (
+        <div>
+            {data.name}
+           <button className="" onClick={e => toggleSelect()}>deselect</button>
+        </div>
+    )
+}
+
+
 
 const SortableItem = SortableElement(inject("schedule")(observer(({ schedule, data }) => {
 
     const [edit, setEdit] = useState(false);
+    const [select, setSelect] = useState(false);
 
     const toggleEdit = () => {
         setEdit(!edit)
+        schedule.selected = edit ? null : [data.name, 'edit'];
     }
 
-    const removeItem = () => {
+    const toggleSelect = (e) => {
+        setSelect(!select)
+        schedule.selected = select ? null : [data.name, 'select'];
+    }
+
+    const removeItem = (e) => {
+        e.preventDefault();
         schedule.remove(data.name);
     }
 
     return (
-        <div>
-            {
-                (() => {
-                    return !edit ? (<>
-                        <span>{data.name}</span>
-                        &nbsp;
-                        <button className="" onClick={e => toggleEdit()}>edit</button>
-                        <button className="" onClick={e => removeItem()}>remove</button>
-                        <button className="" onClick={e => 1}>go</button>
-                    </>) : (<ItemEdit data={data} toggleEdit={e => toggleEdit()}/>)
-                })()
-            }
-        </div>
+        <form>
+            <fieldset disabled={schedule.selected && schedule.selected[0] !== data.name}>
+                {
+                    (() => {
+                        if (edit) return (<ItemEdit data={data} toggleEdit={e => toggleEdit()}/>)
+                        if (select) return (<ItemSelect data={data} toggleSelect={e => toggleSelect()}/>)
+                        return (<>
+                            <span>{data.name}</span>
+                            &nbsp;
+                            <button className="" onClick={e => toggleSelect(e)}>select</button>
+                            <button className="" onClick={e => toggleEdit()}>edit</button>
+                            <button className="" onClick={e => removeItem(e)}>remove</button>
+                            <button className="" onClick={e => 1}>go</button>
+                        </>)
+
+                        
+                    })()
+                }
+            </fieldset>
+        </form>
     )
 })));
 

@@ -2,15 +2,16 @@ import { observable, action, autorun } from 'mobx';
 
 class Schedule {
 
+    @observable selected = null;
     @observable subjectStore = [{
         name: 'test1',
         link: 'https://www.naver.com',
-        time: new TimeTable()
+        time: []
     },
     {
         name: 'test2',
         link: 'https://www.naver.com',
-        time: new TimeTable()
+        time: []
     }]
     
     @action add = (name, link) => {
@@ -20,7 +21,7 @@ class Schedule {
         this.subjectStore.push({
             name: name,
             link: link,
-            time: new TimeTable()
+            time: []
         })
         return true;
     }
@@ -32,10 +33,32 @@ class Schedule {
     }
 
     @action edit = (_name, name, link) => {
-        const index = this.subjectStore.findIndex(x => x.name === _name);
         if (!this._checkName) return;
+        const index = this.subjectStore.findIndex(x => x.name === _name);
         this.subjectStore[index].name = name;
         this.subjectStore[index].link = link;
+    }
+
+    @action addTime = (name, time) => {
+        const indexT = this.getTime().findIndex(x => x[0] === time[0] && x[1] === time[1]);
+        console.log('add', indexT, time);
+        if (indexT !== -1) return;
+        const index = this.subjectStore.findIndex(x => x.name === name);
+        this.subjectStore[index].time.push(time);
+    }
+
+    @action removeTime = (name, time) => {
+        const index = this.subjectStore.findIndex(x => x.name === name);
+        const indexT = this.subjectStore[index].time.findIndex(x => x[0] === time[0] && x[1] === time[1]);
+        if (indexT == -1) return false;
+        this.subjectStore[index].time.splice(indexT, 1);
+        return true
+    }
+
+    @action toggleTime = (name, time) => {
+        time = [Number(time[0]), Number(time[1])];
+        console.log(name, time)
+        if (!this.removeTime(name, time)) this.addTime(name, time);
     }
 
     _checkName() {
@@ -48,6 +71,14 @@ class Schedule {
             return false;
         }
         return true;
+    }
+
+    getTime() {
+        let timeList = [];
+        for (let subject of this.subjectStore) {
+            timeList = timeList.concat(subject.time.map(x=>[x[0], x[1], subject.name]));
+        }
+        return timeList;
     }
     
 }
