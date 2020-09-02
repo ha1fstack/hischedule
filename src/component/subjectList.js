@@ -32,7 +32,7 @@ const ItemEdit = inject("schedule")(observer(({ schedule, data, toggleEdit }) =>
 const ItemSelect = ({data, toggleSelect}) => {
     return (
         <div className="d-flex justify-content-between">
-            <span className="align-self-center font-weight-bold">{data.name}</span>
+            <span className="align-self-center font-weight-bold ml-1">{data.name}</span>
             &nbsp;&nbsp;&nbsp;
             <Button size="sm" variant="primary" onClick={e => toggleSelect()}>선택 완료</Button>
         </div>
