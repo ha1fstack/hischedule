@@ -23,7 +23,7 @@ const SubjectNow = inject("schedule")(observer(({ schedule }) => {
 
     useEffect(() => {
       const interval = setInterval(() => {
-        let subject = schedule.getTime().find(x=> x[0] === day && x[1] === hours - 12)
+        let subject = schedule.getTime().find(x=> x[0] === day && x[1] === hours - 8)
         if (!subject) {
             setDiv((
                 <>
