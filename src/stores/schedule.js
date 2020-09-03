@@ -15,8 +15,10 @@ class Schedule {
     @observable load = false;
     @observable selected = null;
     @observable subjectStore = []
+    @observable alarm = false;
 
     constructor () {
+        if (localStorage.getItem('alarm')) this.alarm = JSON.parse(localStorage.getItem('alarm'));
         if (localStorage.getItem('data')) this.subjectStore = JSON.parse(localStorage.getItem('data'));
     }
     
@@ -95,17 +97,12 @@ class Schedule {
 }
 
 
-class TimeTable {
-
-}
-
-
-
 const schedule = new Schedule();
 
 
 autorun(() => {
     localStorage.setItem('data', JSON.stringify(schedule.subjectStore.toJS()));
+    localStorage.setItem('alarm', JSON.stringify(schedule.alarm));
 })
 
 export default schedule;

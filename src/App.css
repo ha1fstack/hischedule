@@ -1,42 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .noselect {
   -webkit-touch-callout: none !important; /* iOS Safari */
     -webkit-user-select: none !important; /* Safari */
@@ -45,4 +6,19 @@
         -ms-user-select: none !important; /* Internet Explorer/Edge */
             user-select: none !important; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
+}
+
+#dimScreen {
+  width: 100%;
+  height: 100%;
+  background:rgba(255,255,255,0.75); 
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100; /* Just to keep it at the very top */
+}
+
+#floatingText {
+  text-align: center;
+  margin-top: 10%;
 }

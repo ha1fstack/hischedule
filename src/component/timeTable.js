@@ -15,8 +15,8 @@ const TimeRow = inject("schedule")(observer(({ schedule, index, timeList }) =>  
     for (let i = 1; i < 7; i++) {
       let find = timeList.find(x=>x[0] == i && x[1] == index)
       if (find) {
-        items.push(<td style={{backgroundColor: "#d7eaff"}} row={index} col={i} onClick={e => timeToggle(e)}>{find[2]}</td>)
-      } else items.push(<td row={index} col={i} onClick={e => timeToggle(e)}></td>)
+        items.push(<td key={i} style={{backgroundColor: "#d7eaff"}} row={index} col={i} onClick={e => timeToggle(e)}>{find[2]}</td>)
+      } else items.push(<td key={i} row={index} col={i} onClick={e => timeToggle(e)}></td>)
     }
 
     return (

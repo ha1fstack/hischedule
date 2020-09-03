@@ -3,6 +3,9 @@ import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 import { observer, inject } from 'mobx-react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons'
+import { faTimes, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import { Button, ButtonGroup, InputGroup, FormControl } from 'react-bootstrap'
 
 const ItemEdit = inject("schedule")(observer(({ schedule, data, toggleEdit }) => {
@@ -75,9 +78,9 @@ const SortableItem = SortableElement(inject("schedule")(observer(({ schedule, da
                                     &nbsp;&nbsp;&nbsp;
                                     <div>
                                         <ButtonGroup size="sm">
-                                            <Button variant="border border-primary" onClick={e => toggleSelect(e)}>선택</Button>
-                                            <Button variant="border border-primary" onClick={e => toggleEdit()}>수정</Button>
-                                            <Button variant="border border-primary" onClick={e => removeItem(e)}>X</Button>
+                                            <Button variant="outline-primary" onClick={e => toggleSelect(e)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                                            <Button variant="outline-primary" onClick={e => toggleEdit()}><FontAwesomeIcon icon={faPencilAlt} /></Button>
+                                            <Button variant="outline-primary" onClick={e => removeItem(e)}><FontAwesomeIcon icon={faTimes} /></Button>
                                         </ButtonGroup>
                                         &nbsp;
                                         &nbsp;
