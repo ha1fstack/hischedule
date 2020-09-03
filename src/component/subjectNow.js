@@ -122,7 +122,7 @@ const SubjectNow = inject("schedule")(observer(({ schedule }) => {
             />
             <div className="mb-2 d-flex mt-1 mr-1 justify-content-between noselect">
                 
-                <span className="align-self-center flex-grow-1 ml-1 font-weight-bold" style={{fontSize: "20px"}}>HIschedule</span>
+                <span className="align-self-center text-primary flex-grow-1 ml-1 font-weight-bold" style={{fontSize: "20px"}}><span className="border border-primary rounded pr-1 pl-1 mr-1">HI</span>SCHEDULE</span>
                 <span className="mr-3">
                     <Button className="ml-1" variant="outline-primary" size='sm' onClick={()=>window.open("http://www.hongik.ac.kr/", "_blank")}><FontAwesomeIcon icon={faUniversity} />&nbsp;홍</Button>
                     <Button className="ml-1"  variant="outline-primary" size='sm' onClick={()=>window.open("https://cn.hongik.ac.kr/", "_blank")}><FontAwesomeIcon icon={faPencilRuler} />&nbsp;클</Button>
