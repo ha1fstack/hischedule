@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 import { observer, inject } from 'mobx-react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt } from '@fortawesome/free-regular-svg-icons'
-import { faTimes, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPencilAlt, faMousePointer } from '@fortawesome/free-solid-svg-icons'
 import { Button, ButtonGroup, InputGroup, FormControl } from 'react-bootstrap'
 
 const ItemEdit = inject("schedule")(observer(({ schedule, data, toggleEdit }) => {
@@ -49,14 +48,17 @@ const SortableItem = SortableElement(inject("schedule")(observer(({ schedule, da
     const [edit, setEdit] = useState(false);
     const [select, setSelect] = useState(false);
 
-    const toggleEdit = () => {
-        setEdit(!edit)
-        schedule.selected = edit ? null : [data.name, 'edit'];
-    }
-
     const toggleSelect = (e) => {
+        console.log(1)
         setSelect(!select)
         schedule.selected = select ? null : [data.name, 'select'];
+    }
+
+    const toggleEdit = (e) => {
+        console.log(1)
+        setEdit(!edit)
+        console.log(2)
+        schedule.selected = edit ? null : [data.name, 'edit'];
     }
 
     const removeItem = (e) => {
@@ -78,9 +80,12 @@ const SortableItem = SortableElement(inject("schedule")(observer(({ schedule, da
                                     &nbsp;&nbsp;&nbsp;
                                     <div>
                                         <ButtonGroup size="sm">
-                                            <Button variant="outline-primary" onClick={e => toggleSelect(e)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
-                                            <Button variant="outline-primary" onClick={e => toggleEdit()}><FontAwesomeIcon icon={faPencilAlt} /></Button>
-                                            <Button variant="outline-primary" onClick={e => removeItem(e)}><FontAwesomeIcon icon={faTimes} /></Button>
+                                            <Button style={{width:"26px"}} variant="outline-primary" onClick={e => toggleSelect(e)}>&nbsp;</Button>
+                                            <FontAwesomeIcon style={{fontSize:"14px", top:"9px", left:"9px"}} className="text-primary position-absolute" icon={faMousePointer} />
+                                            <Button style={{width:"26px"}} variant="outline-primary" onClick={e => toggleEdit(e)}>&nbsp;</Button>
+                                            <FontAwesomeIcon size="xs" style={{fontSize:"14px", top:"9px", left:"31px"}} className="text-primary position-absolute" icon={faPencilAlt} />
+                                            <Button style={{width:"26px"}} variant="outline-primary rounded-right" onClick={e => removeItem(e)}>&nbsp;</Button>
+                                            <FontAwesomeIcon size="xs" style={{fontSize:"14px", top:"9px", left:"58px"}} className="text-primary position-absolute" icon={faTimes} />
                                         </ButtonGroup>
                                         &nbsp;
                                         &nbsp;

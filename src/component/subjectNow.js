@@ -91,7 +91,7 @@ const SubjectNow = inject("schedule")(observer(({ schedule }) => {
             if (schedule.alarm) {
                 if (alarmic) {
                     if (play && play != hours) {
-                        alarmOn()
+                        alarmOn();
                     }
                 }
                 play = hours;
