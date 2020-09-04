@@ -39,9 +39,9 @@
 
         window.addEventListener('storage', function(e){
           if(e.key == "openpages") {
-            self.opener='Self';
             window.location.href="about:blank";
-            //window.close();
+            self.opener='Self';
+            window.close();
           }
         }, false);
     </script>
