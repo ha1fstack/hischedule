@@ -81,11 +81,11 @@ const SortableItem = SortableElement(inject("schedule")(observer(({ schedule, da
                                     <div>
                                         <ButtonGroup size="sm">
                                             <Button style={{width:"26px"}} variant="outline-primary" onClick={e => toggleSelect(e)}>&nbsp;</Button>
-                                            <FontAwesomeIcon style={{fontSize:"14px", top:"9px", left:"9px"}} className="text-primary position-absolute" icon={faMousePointer} />
+                                            <FontAwesomeIcon style={{fontSize:"14px", top:"9px", left:"9px", zIndex:-1}} className="text-primary position-absolute" icon={faMousePointer} />
                                             <Button style={{width:"26px"}} variant="outline-primary" onClick={e => toggleEdit(e)}>&nbsp;</Button>
-                                            <FontAwesomeIcon size="xs" style={{fontSize:"14px", top:"9px", left:"31px"}} className="text-primary position-absolute" icon={faPencilAlt} />
+                                            <FontAwesomeIcon size="xs" style={{fontSize:"14px", top:"9px", left:"31px", zIndex:-1}} className="text-primary position-absolute" icon={faPencilAlt} />
                                             <Button style={{width:"26px"}} variant="outline-primary rounded-right" onClick={e => removeItem(e)}>&nbsp;</Button>
-                                            <FontAwesomeIcon size="xs" style={{fontSize:"14px", top:"9px", left:"58px"}} className="text-primary position-absolute" icon={faTimes} />
+                                            <FontAwesomeIcon size="xs" style={{fontSize:"14px", top:"9px", left:"58px", zIndex:-1}} className="text-primary position-absolute" icon={faTimes} />
                                         </ButtonGroup>
                                         &nbsp;
                                         &nbsp;
