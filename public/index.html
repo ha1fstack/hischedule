@@ -34,15 +34,16 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>HIschedule</title>
-    <script type="text/javascript">
-      //prevent duplicate pages
-      localStorage.openpages = Date.now();
-      var onLocalStorageEvent = function(e){
-          if(e.key == "openpages"){
-              window.close();
+    <script>
+        localStorage.openpages = Date.now();
+
+        window.addEventListener('storage', function(e){
+          if(e.key == "openpages") {
+            self.opener='Self';
+            window.location.href="about:blank";
+            //window.close();
           }
-      };
-      window.addEventListener('storage', onLocalStorageEvent, false);
+        }, false);
     </script>
   </head>
   <body>
