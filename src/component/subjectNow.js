@@ -5,7 +5,7 @@ import ReactAudioPlayer from 'react-audio-player';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell, faBellSlash } from '@fortawesome/free-regular-svg-icons'
-import { faBellSlash as faBellSlash2, faUniversity, faPencilRuler, faClock } from '@fortawesome/free-solid-svg-icons'
+import { faBellSlash as faBellSlash2, faUniversity, faPencilRuler, faClock, faSchool } from '@fortawesome/free-solid-svg-icons'
 import { Button } from 'react-bootstrap'
 
 import alarm from '../assets/alarm.mp3'
@@ -126,7 +126,9 @@ const SubjectNow = inject("schedule")(observer(({ schedule }) => {
                 <span className="mr-3">
                     <Button className="ml-1" variant="outline-primary" size='sm' onClick={()=>window.open("http://www.hongik.ac.kr/", "_blank")}><FontAwesomeIcon icon={faUniversity} />&nbsp;홍</Button>
                     <Button className="ml-1"  variant="outline-primary" size='sm' onClick={()=>window.open("https://cn.hongik.ac.kr/", "_blank")}><FontAwesomeIcon icon={faPencilRuler} />&nbsp;클</Button>
+                    <Button className="ml-1"  variant="outline-primary" size='sm' onClick={()=>window.open("https://cn2.hongik.ac.kr/", "_blank")}><FontAwesomeIcon icon={faSchool} />&nbsp;룸</Button>
                     <Button className="ml-1"  variant="outline-primary" size='sm' onClick={()=>window.open("https://everytime.kr/", "_blank")}><FontAwesomeIcon icon={faClock} />&nbsp;에</Button>
+                    <Button className="ml-1" variant="primary" size='sm' onClick={()=>window.open("https://at.hongik.ac.kr/", "_blank")}>출결</Button>
                 </span>
                 <span className="text-primary align-self-center mr-1" style={{fontSize:'11px'}}>57분 알람</span>
                 <div>
